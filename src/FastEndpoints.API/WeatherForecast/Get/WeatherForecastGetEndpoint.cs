@@ -1,4 +1,4 @@
-﻿using FastApiIntegration.API.Processor;
+﻿using FastApiIntegration.API.Processors;
 using FastApiIntegration.API.Services;
 using System.Net;
 
@@ -30,7 +30,7 @@ public class WeatherForecastGetEndpoint : Endpoint<WeatherForecastGetEndpointReq
             s[403] = "forbidden response description goes here";
         });
 
-        PostProcessors(new MyPostProcessor<WeatherForecastGetEndpointRequest, WeatherForecastGetEndpointResponse>());
+        PostProcessors(new PostAuditProcessor<WeatherForecastGetEndpointRequest, WeatherForecastGetEndpointResponse>());
     }
 
     public override async Task HandleAsync(WeatherForecastGetEndpointRequest req, CancellationToken ct)

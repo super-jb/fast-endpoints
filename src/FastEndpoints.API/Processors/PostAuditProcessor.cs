@@ -2,9 +2,9 @@
 using FastApiIntegration.API.WeatherForecast.Get;
 using FastEndpoints.Validation;
 
-namespace FastApiIntegration.API.Processor;
+namespace FastApiIntegration.API.Processors;
 
-public class MyPostProcessor<TRequest, TResponse> : IPostProcessor<TRequest, TResponse>
+public class PostAuditProcessor<TRequest, TResponse> : IPostProcessor<TRequest, TResponse>
 {
     public Task PostProcessAsync(TRequest req, TResponse res, HttpContext ctx, IReadOnlyCollection<ValidationFailure> failures, CancellationToken ct)
     {
@@ -13,9 +13,9 @@ public class MyPostProcessor<TRequest, TResponse> : IPostProcessor<TRequest, TRe
 
         if (res is WeatherForecastGetEndpointResponse response)
         {
-            int count = response.WeatherForecasts.Count();
-            logger.LogWarning($"{count} retrieved");
-            auditService.RecordAudit("GET", $"{count} retrieved");
+            string message = $"{response.WeatherForecasts.Count()} forecasts retrieved";
+            logger.LogWarning(message);
+            auditService.RecordAudit("GET", message);
         }
         logger.LogInformation("something happened");
 

@@ -6,6 +6,5 @@ public class AuditService : IAuditService
     {
         // does something
         return Task.CompletedTask;
-        //throw new NotImplementedException();
     }
 }

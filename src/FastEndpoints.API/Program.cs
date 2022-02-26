@@ -17,7 +17,7 @@ builder.Services.AddSwaggerDoc(settings =>
     {
         x.ContractResolver = new CamelCasePropertyNamesContractResolver();
     },
-    tagIndex: 2,
+    tagIndex: 3,
     shortSchemaNames: true);
 
 builder.Services.AddScoped<IAuditService, AuditService>();
